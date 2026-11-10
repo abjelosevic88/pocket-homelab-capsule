@@ -29,7 +29,7 @@ type linkRoute struct {
 
 var linkRoutes = []linkRoute{
 	{"GET", regexp.MustCompile(`^/api/v1/auth/me$`), ""},
-	{"GET", regexp.MustCompile(`^/api/v1/(home|summary|search|capsules|predictions|events|day/\d{4}-\d{2}-\d{2})$`), "capsule:read"},
+	{"GET", regexp.MustCompile(`^/api/v1/(home|summary|search|capsules|predictions|events|templates|sections|day/\d{4}-\d{2}-\d{2})$`), "capsule:read"},
 	{"GET", regexp.MustCompile(`^/api/v1/capsules/\d+$`), "capsule:read"},
 	{"GET", regexp.MustCompile(`^/api/v1/uploads/\d+$`), "capsule:read"},
 	{"POST", regexp.MustCompile(`^/api/v1/capsules$`), "capsule:write"},

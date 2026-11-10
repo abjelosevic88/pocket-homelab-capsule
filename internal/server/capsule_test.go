@@ -289,6 +289,7 @@ func TestLinkScopes(t *testing.T) {
 		{read, r("GET", "/api/v1/capsules"), true},
 		{read, r("GET", "/api/v1/capsules/3"), true},
 		{read, r("GET", "/api/v1/day/2026-11-10"), true},
+		{read, r("GET", "/api/v1/templates"), true},
 		{read, r("POST", "/api/v1/capsules"), false},
 		{write, r("POST", "/api/v1/capsules"), true},
 		{write, r("POST", "/api/v1/capsules/3/items"), true},
