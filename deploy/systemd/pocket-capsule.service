@@ -1,0 +1,23 @@
+[Unit]
+Description=Pocket Capsule — tabletop role-playing games (5E)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=pocket-capsule
+Group=pocket-capsule
+ExecStart=/usr/local/bin/pocket-capsule
+Environment=DATA_DIR=/var/lib/pocket-capsule
+Environment=PORT=8080
+Environment=BASE_URL=https://forum.example.com
+Environment=SECURE_COOKIES=true
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/pocket-capsule
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

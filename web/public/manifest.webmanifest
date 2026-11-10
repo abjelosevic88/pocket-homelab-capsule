@@ -1,0 +1,51 @@
+{
+  "name": "Pocket Capsule",
+  "short_name": "Capsule",
+  "description": "Time capsules: seal letters, photos, recordings and predictions until a day you choose, fill them together, and open them when the day comes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#7a4a9e",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New capsule",
+      "url": "/new"
+    },
+    {
+      "name": "Ready to open",
+      "url": "/?show=ready"
+    },
+    {
+      "name": "Predictions",
+      "url": "/predictions"
+    }
+  ]
+}
