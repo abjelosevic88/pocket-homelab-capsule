@@ -21,6 +21,19 @@ var linkOffers = []core.Offer{
 	{Scope: "capsule:write", Name: "Add to your time capsules", Description: "Start a capsule for you and put things in it (a letter, a photo, a recording), also through the slot of a sealed one: from Pocket Voice, Photos or Pocket AI when you ask. Changes or removes only what that app put in itself, and never seals or opens a capsule."},
 }
 
+// portable is what Pocket Move may copy out and bring in for a person
+// (docs/move.md in pocket-homelab-core); Register adds move:export/import.
+// What is inside a sealed capsule stays packed in the file, as in the export.
+var portable = &core.Portable{
+	Exports: []core.PortableExport{
+		{Path: "/api/v1/export.json", File: "capsule.json", Kind: core.KindPocket, Title: "The capsules you made, with what is in them (sealed ones stay packed), who each is for, and your yearly capsules"},
+		{Path: "/api/v1/export.csv", File: "capsules.csv", Kind: core.KindCSV, Title: "Every capsule you are in, as a table"},
+	},
+	Imports: []core.PortableImport{
+		{Path: "/api/v1/import", Kind: core.KindPocket, ContentType: "application/json", MaxBytes: 1 << 30, Title: "Adds the capsules from another box, sealed ones still sealed; capsules you already have are left alone"},
+	},
+}
+
 type linkRoute struct {
 	methods string
 	path    *regexp.Regexp
@@ -42,6 +55,9 @@ var errLinkScope = errors.New("outside the link's scope")
 
 // linkAllows reports whether a link token with these scopes may make this request.
 func linkAllows(scopes []string, r *http.Request) bool {
+	if portable.LinkAllows(scopes, r) {
+		return true
+	}
 	for _, lr := range linkRoutes {
 		if !strings.Contains(" "+lr.methods+" ", " "+r.Method+" ") || !lr.path.MatchString(r.URL.Path) {
 			continue

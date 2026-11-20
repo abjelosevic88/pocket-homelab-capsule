@@ -244,6 +244,7 @@ func (s *Server) importDoc(ctx context.Context, u *store.User, doc *exportDoc) (
 		}
 		made++
 	}
+	rituals := 0
 	for _, rt := range doc.Rituals {
 		have, _ := s.store.Rituals(ctx, u.ID)
 		dup := false
@@ -254,8 +255,10 @@ func (s *Server) importDoc(ctx context.Context, u *store.User, doc *exportDoc) (
 		}
 		if !dup && rt.Month >= 1 && rt.Month <= 12 && rt.Day >= 1 && rt.Day <= 31 {
 			rt.ID, rt.UserID = 0, u.ID
-			_ = s.store.SaveRitual(ctx, &rt)
+			if s.store.SaveRitual(ctx, &rt) == nil {
+				rituals++
+			}
 		}
 	}
-	return map[string]any{"capsules": made, "skipped": skipped, "items": things}, nil
+	return map[string]any{"capsules": made, "skipped": skipped, "items": things, "rituals": rituals}, nil
 }

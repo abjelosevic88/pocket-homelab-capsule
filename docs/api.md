@@ -69,3 +69,5 @@ Capsule offers `capsule:read` (lists, a capsule's outside, opened ones' insides,
 ## Admin and data
 
 `GET /backup` (admin: the whole database), `GET /export.json`, `POST /import` (the export file as the body; twice = once), `GET /export.csv`, `GET/PUT /settings`, `GET /settings/system`, `GET/POST/DELETE /tokens`, `GET/POST/PUT/DELETE /users`. Health: `GET /healthz`, `GET /readyz`, `GET /metrics` (`METRICS_ENABLED`).
+
+Pocket Move can copy your capsules out and bring them in: `GET /pocket/portable` describes `export.json` and `export.csv` (link scope `move:export`) and `POST /import` (`move:import`, the export as the body). Sealed capsules stay packed in the file and come in still sealed; a second run of the same file adds nothing.
